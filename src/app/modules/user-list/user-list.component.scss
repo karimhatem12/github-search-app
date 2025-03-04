@@ -1,0 +1,44 @@
+@use 'mixins';
+
+img {
+    border-radius: 50%;
+}
+
+.no-data {
+    font-size: x-large;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.spinner {
+        flex-direction: column;
+    }
+}
+
+.table {
+    margin: 0rem 4rem;
+    border: 1px solid #fff;
+    border-radius: 2rem;
+    overflow: hidden;
+
+    p-table {
+
+        th,
+        td {
+            text-align: center;
+            cursor: pointer;
+        }
+    }
+
+    app-footer {
+        margin: 2rem;
+    }
+}
+
+
+@include mixins.respond-to('lg') {
+    .table {
+        margin: 0rem 1rem;
+    }
+}

@@ -1,0 +1,58 @@
+<app-search />
+
+<div *ngIf="loader$ | async" class="no-data spinner">
+    <p-progress-spinner ariaLabel="loading"></p-progress-spinner>
+    <p>Loading users...</p>
+</div>
+
+<ng-container *ngIf="users$ | async as usersData ; else noDataMessage">
+
+    <div *ngIf="usersData.items.length > 0 && !(loader$ | async)" class="table">
+        <p-table [value]="usersData.items" [rows]="perPage">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Username</th>
+                    <th>Avatar</th>
+                    <th>User Details</th>
+                    <th>User Repositories</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-user>
+                <tr>
+                    <td (click)="openUserProfile(user.html_url)" [pTooltip]="user.html_url" tooltipPosition="bottom"
+                        class="clickable">
+                        {{ user.login }}
+                    </td>
+                    <td (click)="openUserProfile(user.avatar_url)" class="clickable">
+                        <img [src]="user.avatar_url" width="50">
+                    </td>
+                    <td class="clickable">
+                        <i class="pi pi-id-card" style="font-size: 1.5rem" (click)="showDetails(user.login)"></i>
+                    </td>
+                    <td class="clickable">
+                        <i class="pi pi-folder" style="font-size: 1.5rem" (click)="goToRepo(user.login)"></i>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+        <app-footer [footerInput]="{ 
+                totalPages: getTotalPages(usersData), 
+                pageNumber: page, 
+                pageSize: perPage, 
+                totalItems: usersData.total_count 
+            }" (footerOutput)="onFooterChange($event)">
+        </app-footer>
+    </div>
+</ng-container>
+
+<ng-template #noDataMessage>
+    <div class="no-data">
+        <p>No data available. Please search to get results.</p>
+    </div>
+</ng-template>
+
+<p-dialog [header]="userName + ' Details'" [modal]="true" [(visible)]="showMoreDetails" [style]="{ width: '25rem' }">
+    <app-user-details *ngIf="showMoreDetails" [userName]="userName"></app-user-details>
+</p-dialog>
