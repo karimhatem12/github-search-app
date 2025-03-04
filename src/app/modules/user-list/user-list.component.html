@@ -7,7 +7,7 @@
 
 <ng-container *ngIf="users$ | async as usersData ; else noDataMessage">
 
-    <div *ngIf="usersData.items.length > 0 && !(loader$ | async)" class="table">
+    <div *ngIf="usersData && usersData.items && usersData.items.length > 0 && !(loader$ | async)" class="table">
         <p-table [value]="usersData.items" [rows]="perPage">
             <ng-template pTemplate="header">
                 <tr>
