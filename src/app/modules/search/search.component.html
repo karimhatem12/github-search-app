@@ -1,0 +1,12 @@
+<div class="navbar">
+    <p>GitHub</p>
+    <div class="navbar-search" *ngIf="!hideSearch">
+        <input type="text" pInputText [(ngModel)]="query" placeholder="Search GitHub Users"
+            aria-label="Search GitHub Users" (keyup.enter)="search()" />
+        <button pButton label="Search" (click)="search()"></button>
+    </div>
+
+    <div class="navbar-search" *ngIf="hideSearch">
+        <button pButton label="Users List" (click)="goToUserList()"></button>
+    </div>
+</div>
