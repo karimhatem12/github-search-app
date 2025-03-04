@@ -1,0 +1,53 @@
+<div class="footer-container" *ngIf="footerInput">
+    <div>
+        <span><strong>{{ footerInput.totalItems > 0 ? (footerInput.pageSize * footerInput.pageNumber) -
+                footerInput.pageSize + 1 : footerInput.totalItems}} -
+                {{ footerInput.pageSize *
+                footerInput.pageNumber > footerInput.totalItems ? footerInput.totalItems : footerInput.pageSize *
+                footerInput.pageNumber}} </strong>of <strong>
+                {{footerInput.totalItems}} </strong>results</span>
+    </div>
+    <div class="footer">
+        <div class="items-per-page">
+            <span>Items per page</span>
+            <select class="dropdown" [value]="footerInput.pageSize" (change)="onSizaPageChange($event )">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+            </select>
+        </div>
+        <div class="pagination">
+            <button class="btn first" aria-label="Previous Page" [disabled]="footerInput.pageNumber == 1"
+                (click)="onPageChange( 1,footerInput.pageSize)">
+                <svg>
+                    <use href="#FirstPage"></use>
+                </svg>
+            </button>
+            <div class="pagination-buttons">
+                <button class="btn prev" aria-label="Previous Page" [disabled]="footerInput.pageNumber == 1"
+                    (click)="onPageChange( footerInput.pageNumber - 1,footerInput.pageSize)">
+                    <svg class="arrow">
+                        <use href="#arrow-down"></use>
+                    </svg>
+                </button>
+                <div class="pagination-info">
+                    <span>{{footerInput.pageNumber}} - {{footerInput.totalPages}}</span>
+                </div>
+                <button class="btn next" aria-label="Next Page"
+                    [disabled]="footerInput.pageNumber == footerInput.totalPages"
+                    (click)="onPageChange(footerInput.pageNumber + 1,footerInput.pageSize)">
+                    <svg class="arrow">
+                        <use href="#arrow-down"></use>
+                    </svg>
+                </button>
+            </div>
+            <button class="btn last" aria-label="Next Page"
+                [disabled]="footerInput.pageNumber == footerInput.totalPages"
+                (click)="onPageChange(footerInput.totalPages,footerInput.pageSize)">
+                <svg>
+                    <use href="#LastPage"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+@use 'variables';
+@use 'mixins';
+
+.footer-container {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .footer {
+        display: flex;
+
+        .items-per-page {
+            margin-right: 1rem;
+
+            span {
+                margin-right: 8px;
+                font-size: 14px;
+                color: variables.$text-color;
+            }
+
+            .dropdown {
+                padding: 8px;
+                border: 1px solid #fff;
+                border-radius: 1rem;
+                background: variables.$background-color;
+                color: variables.$text-color;
+                cursor: pointer;
+                font-size: 14px;
+                outline: none;
+
+                &:hover {
+                    background: #ccc;
+                }
+            }
+        }
+
+        .pagination {
+            display: flex;
+
+            .pagination-info {
+                margin: 0rem 0.3rem;
+
+                span {
+                    font-size: 14px;
+                    color: variables.$text-color;
+                }
+            }
+
+            // Pagination Buttons
+            .pagination-buttons {
+                display: flex;
+                align-items: center;
+                border-radius: 1rem;
+
+                .prev .arrow {
+                    transform: rotate(90deg);
+                }
+
+                .next .arrow {
+                    transform: rotate(-90deg);
+                }
+            }
+
+            .btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 8px;
+                border: none;
+                border-radius: 50%;
+                background: transparent;
+                color: white;
+                cursor: pointer;
+
+                svg {
+                    width: 10px;
+                }
+
+            }
+
+            .last,
+            .first {
+                margin: 0rem 0.5rem;
+
+                svg {
+                    width: 15px;
+                }
+            }
+        }
+    }
+
+}
+
+@include mixins.respond-to('lg') {
+
+    .footer-container {
+        flex-direction: column;
+
+
+        .footer {
+            margin-left: 0rem;
+            flex-direction: column;
+
+            .items-per-page {
+                margin: 1rem;
+            }
+
+            .pagination {
+                justify-content: center;
+            }
+        }
+    }
+
+}
