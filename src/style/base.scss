@@ -1,0 +1,25 @@
+@use 'variables';
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: variables.$font-family-base;
+    font-size: variables.$font-size-base;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+svg {
+    width: 15px;
+    height: 15px;
+}
