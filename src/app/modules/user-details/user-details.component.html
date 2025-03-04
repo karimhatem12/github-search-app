@@ -1,0 +1,19 @@
+<div class="user-dialog" *ngIf="user">
+    <div class="avatar">
+        <img [src]="user.avatar_url" alt="{{ user.name || user.login }}">
+    </div>
+
+    <h2 class="name">{{ user.name || user.login }}</h2>
+    <p class="bio">{{ user.bio || 'No bio available' }}</p>
+
+    <div class="info">
+        <p><strong>Location:</strong> {{ user.location || 'Not Available' }}</p>
+        <p><strong>Public Repos:</strong> {{ user.public_repos }}</p>
+        <p><strong>Followers:</strong> {{ user.followers }}</p>
+        <p><strong>Following:</strong> {{ user.following }}</p>
+    </div>
+
+    <div class="actions">
+        <a [href]="user.html_url" target="_blank" class="btn github">GitHub Profile</a>
+    </div>
+</div>
