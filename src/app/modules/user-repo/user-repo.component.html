@@ -1,0 +1,45 @@
+<app-search [hideSearch]="true" />
+
+<ng-container *ngIf="repo.length > 0; else noDataMessage">
+
+    <div class="table">
+        <p-table [value]="repo" [rows]="perPage">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th *ngFor="let col of columns" (click)="col.sortable ? sortby(col.field) : null">
+                        {{ col.header }}
+                        <i *ngIf="sort === col.field && col.sortable" class="pi pi-sort-amount-up"></i>
+                    </th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-user>
+                <tr>
+                    <td *ngFor="let col of columns">
+                        <span *ngIf="col.field !== 'description'">
+                            {{ col.field.includes('at') ? (user[col.field] | date:'longDate'): user[col.field]}}
+                        </span>
+                        <span *ngIf="col.field === 'description'" [pTooltip]="user[col.field]" tooltipPosition="bottom"
+                            class="clickable">
+                            {{ user[col.field] | slice:0:40 }}
+                        </span>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+        <app-footer [footerInput]="{ 
+                totalPages: getTotalPages(), 
+                pageNumber: page, 
+                pageSize: perPage, 
+                totalItems: this.totalPages
+            }" (footerOutput)="onFooterChange($event)">
+        </app-footer>
+    </div>
+</ng-container>
+
+<ng-template #noDataMessage>
+    <div class="no-data">
+        <p>No data available. Please search to get results.</p>
+    </div>
+</ng-template>
